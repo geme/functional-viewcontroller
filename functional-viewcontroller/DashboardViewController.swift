@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum DashboardResult: Result {
+enum DashboardOutput: Output {
     case red(text: String)
     case blue(i: Int)
     case green(color: UIColor)
@@ -16,9 +16,9 @@ enum DashboardResult: Result {
 
 class DashboardViewController: UIViewController, Routable {
     
-    var onCompletion: DashboardResult -> Void = { _ in () }
+    var onCompletion: DashboardOutput -> Void = { _ in () }
     
-    class func screen() -> Screen<DashboardResult>{
+    class func screen() -> Screen<DashboardOutput>{
         return Screen { callback in
             let vc = DashboardViewController()
             vc.onCompletion = callback

@@ -8,14 +8,23 @@
 
 import UIKit
 
-enum RedResult: Result {
+enum RedOutput: Output {
     case gold(color: UIColor)
     case silver(color: UIColor)
 }
 
 class RedViewController: UIViewController, Routable {
     
-    var onCompletion: RedResult -> Void = { _ in () }
+    var onCompletion: RedOutput -> Void = { _ in () }
+    
+    class func screen (text: String) -> Screen<RedOutput> {
+        return Screen {
+            let vc = RedViewController()
+            vc.title = text
+            vc.onCompletion = $0
+            return vc
+        }
+    }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!

@@ -14,6 +14,8 @@
 		38BCC2C01C8C2E320072EB55 /* functional_viewcontrollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCC2BF1C8C2E320072EB55 /* functional_viewcontrollerTests.swift */; };
 		38EB283F1C8F6E0600398F16 /* SilverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EB283E1C8F6E0600398F16 /* SilverViewController.swift */; };
 		38EB28411C8F6E1900398F16 /* GoldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EB28401C8F6E1900398F16 /* GoldViewController.swift */; };
+		38EF07001C90AFB30014B7A4 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF06FF1C90AFB30014B7A4 /* NavigationController.swift */; };
+		38EF07021C90B0820014B7A4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF07011C90B0820014B7A4 /* Router.swift */; };
 		38FE15D91C8EB89200E1CCCF /* RedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE15D81C8EB89200E1CCCF /* RedViewController.swift */; };
 		38FE15DC1C8EB8AD00E1CCCF /* GreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE15DB1C8EB8AD00E1CCCF /* GreenViewController.swift */; };
 		38FE15DE1C8EB8B800E1CCCF /* BlueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE15DD1C8EB8B800E1CCCF /* BlueViewController.swift */; };
@@ -41,6 +43,8 @@
 		38BCC2C11C8C2E320072EB55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38EB283E1C8F6E0600398F16 /* SilverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SilverViewController.swift; sourceTree = "<group>"; };
 		38EB28401C8F6E1900398F16 /* GoldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoldViewController.swift; sourceTree = "<group>"; };
+		38EF06FF1C90AFB30014B7A4 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		38EF07011C90B0820014B7A4 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		38FE15D81C8EB89200E1CCCF /* RedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedViewController.swift; sourceTree = "<group>"; };
 		38FE15DB1C8EB8AD00E1CCCF /* GreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenViewController.swift; sourceTree = "<group>"; };
 		38FE15DD1C8EB8B800E1CCCF /* BlueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueViewController.swift; sourceTree = "<group>"; };
@@ -85,13 +89,10 @@
 		38BCC2A91C8C2E320072EB55 /* functional-viewcontroller */ = {
 			isa = PBXGroup;
 			children = (
+				38EF06FE1C90AF970014B7A4 /* ViewControllers */,
 				38BCC2AA1C8C2E320072EB55 /* AppDelegate.swift */,
-				38BCC2AC1C8C2E320072EB55 /* DashboardViewController.swift */,
-				38FE15D81C8EB89200E1CCCF /* RedViewController.swift */,
-				38FE15DB1C8EB8AD00E1CCCF /* GreenViewController.swift */,
-				38FE15DD1C8EB8B800E1CCCF /* BlueViewController.swift */,
-				38EB283E1C8F6E0600398F16 /* SilverViewController.swift */,
-				38EB28401C8F6E1900398F16 /* GoldViewController.swift */,
+				38EF07011C90B0820014B7A4 /* Router.swift */,
+				38EF06FF1C90AFB30014B7A4 /* NavigationController.swift */,
 				38FE15DA1C8EB89800E1CCCF /* Supporting Files */,
 			);
 			path = "functional-viewcontroller";
@@ -104,6 +105,19 @@
 				38BCC2C11C8C2E320072EB55 /* Info.plist */,
 			);
 			path = "functional-viewcontrollerTests";
+			sourceTree = "<group>";
+		};
+		38EF06FE1C90AF970014B7A4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				38BCC2AC1C8C2E320072EB55 /* DashboardViewController.swift */,
+				38FE15D81C8EB89200E1CCCF /* RedViewController.swift */,
+				38FE15DB1C8EB8AD00E1CCCF /* GreenViewController.swift */,
+				38FE15DD1C8EB8B800E1CCCF /* BlueViewController.swift */,
+				38EB283E1C8F6E0600398F16 /* SilverViewController.swift */,
+				38EB28401C8F6E1900398F16 /* GoldViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		38FE15DA1C8EB89800E1CCCF /* Supporting Files */ = {
@@ -216,9 +230,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38EF07001C90AFB30014B7A4 /* NavigationController.swift in Sources */,
 				38FE15DC1C8EB8AD00E1CCCF /* GreenViewController.swift in Sources */,
 				38BCC2AD1C8C2E320072EB55 /* DashboardViewController.swift in Sources */,
 				38FE15D91C8EB89200E1CCCF /* RedViewController.swift in Sources */,
+				38EF07021C90B0820014B7A4 /* Router.swift in Sources */,
 				38EB283F1C8F6E0600398F16 /* SilverViewController.swift in Sources */,
 				38FE15DE1C8EB8B800E1CCCF /* BlueViewController.swift in Sources */,
 				38EB28411C8F6E1900398F16 /* GoldViewController.swift in Sources */,
