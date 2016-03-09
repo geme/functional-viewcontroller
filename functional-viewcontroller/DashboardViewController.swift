@@ -8,22 +8,23 @@
 
 import UIKit
 
-protocol Result {}
-
-enum ViewControllerResult: Result {
+enum DashboardResult: Result {
     case red(text: String)
     case blue(i: Int)
     case green(color: UIColor)
 }
 
-protocol Completion {
-    typealias T
-    var onCompletion: T -> Void { get set }
-}
-
-class DashboardViewController: UIViewController, Completion {
+class DashboardViewController: UIViewController, Routable {
     
-    var onCompletion: ViewControllerResult -> Void = { _ in () }
+    var onCompletion: DashboardResult -> Void = { _ in () }
+    
+    class func screen() -> Screen<DashboardResult>{
+        return Screen { callback in
+            let vc = DashboardViewController()
+            vc.onCompletion = callback
+            return vc
+        }
+    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -59,15 +60,15 @@ class DashboardViewController: UIViewController, Completion {
     }
     
     func red(sender: UIButton) {
-        onCompletion(ViewControllerResult.red(text: "foo"))
+        onCompletion(.red(text: "foo"))
     }
     
     func blue(sender: UIButton) {
-        onCompletion(ViewControllerResult.blue(i: 12345))
+        onCompletion(.blue(i: 12345))
     }
     
     func green(sender: UIButton) {
-        onCompletion(ViewControllerResult.green(color: UIColor.greenColor()))
+        onCompletion(.green(color: UIColor.greenColor()))
     }
 
 }

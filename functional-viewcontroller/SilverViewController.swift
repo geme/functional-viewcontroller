@@ -6,4 +6,19 @@
 //  Copyright © 2016 @gerritmenzel. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class SilverViewController: UIViewController {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    convenience init(color: UIColor) {
+        self.init(nibName: nil, bundle: nil)
+        self.view.backgroundColor = color
+    }
+}
