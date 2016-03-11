@@ -11,46 +11,32 @@ import UIKit
 class Router {
     
     func app () -> UIViewController {
-        return foo(DashboardViewController.screen(), route).run(gameOver)
+        return Screen(DashboardViewController()).then(routeDashboard).run(gameOver)
     }
     
     func gameOver(result: Output) {
         print("The end")
     }
-    
-    func foo<A,B>(screen: Screen<A>, _ route: A -> NavigationController<B>) -> NavigationController<B> {
-        return NavigationController(screen).then(route)
-    }
-    
-    func foo<A>(screen: Screen<A>) -> NavigationController<A> {
-        return NavigationController(screen)
-    }
-    
-    func foo<A>(vc: UIViewController) -> NavigationController<A> {
-        return foo(Screen<A> { _ in
-            return vc
-        })
-    }
 }
 
 extension Router {
-    func route(result: DashboardOutput) -> NavigationController<Output> {
+    func routeDashboard(result: DashboardOutput) -> Screen<Output> {
         switch result {
-        case let .red(text):
-            return foo(RedViewController.screen(text), route)
+        case let .red(model):
+            return Screen(RedViewController(model)).then(routeRed)
         case .blue:
-            return foo(BlueViewController())
+            return Screen(viewController: BlueViewController())
         case .green:
-            return foo(GreenViewController())
+            return Screen(viewController: GreenViewController())
         }
     }
     
-    func route(route: RedOutput) -> NavigationController<Output> {
-        switch route {
+    func routeRed(result: RedOutput) -> Screen<Output> {
+        switch result {
         case let .gold(color):
-            return foo(GoldViewController(color: color))
+            return Screen(viewController: GoldViewController(color: color))
         case let .silver(color):
-            return foo(SilverViewController(color: color))
+            return Screen(viewController: SilverViewController(color: color))
         }
     }
 }

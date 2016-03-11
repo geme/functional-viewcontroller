@@ -9,7 +9,7 @@
 import UIKit
 
 enum DashboardOutput: Output {
-    case red(text: String)
+    case red(redViewModel: RedViewModel)
     case blue(i: Int)
     case green(color: UIColor)
 }
@@ -18,8 +18,8 @@ class DashboardViewController: UIViewController, Routable {
     
     var onCompletion: DashboardOutput -> Void = { _ in () }
     
-    class func screen() -> Screen<DashboardOutput>{
-        return Screen { callback in
+    class func screen() -> ViewControllerOutput<DashboardOutput>{
+        return ViewControllerOutput { callback in
             let vc = DashboardViewController()
             vc.onCompletion = callback
             return vc
@@ -60,7 +60,7 @@ class DashboardViewController: UIViewController, Routable {
     }
     
     func red(sender: UIButton) {
-        onCompletion(.red(text: "foo"))
+        onCompletion(.red(redViewModel: RedViewModel(text: "foobar")))
     }
     
     func blue(sender: UIButton) {

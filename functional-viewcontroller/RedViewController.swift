@@ -13,18 +13,13 @@ enum RedOutput: Output {
     case silver(color: UIColor)
 }
 
+struct RedViewModel {
+    let text: String
+}
+
 class RedViewController: UIViewController, Routable {
     
     var onCompletion: RedOutput -> Void = { _ in () }
-    
-    class func screen (text: String) -> Screen<RedOutput> {
-        return Screen {
-            let vc = RedViewController()
-            vc.title = text
-            vc.onCompletion = $0
-            return vc
-        }
-    }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -51,6 +46,15 @@ class RedViewController: UIViewController, Routable {
         silver.addTarget(self, action: "silver:", forControlEvents: .TouchUpInside)
         
         self.view.addSubview(silver)
+    }
+    
+    convenience init(_ model: RedViewModel) {
+        self.init()
+        bindViewModel(model)
+    }
+    
+    func bindViewModel(model: RedViewModel) {
+        title = model.text
     }
     
     func gold(sender: UIButton) {
