@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 
-protocol Output {}
 protocol Routable {
-    typealias T
-    var onCompletion: T -> Void { get set }
+    typealias A
+    var onCompletion: A -> Void { get set }
 }
 
 struct ViewControllerOutput<A> {
@@ -26,7 +25,7 @@ extension ViewControllerOutput {
         }
     }
     
-    init<T where T: Routable, T.T == A, T:UIViewController>(_ routableViewController: T) {
+    init<T where T: Routable, T.A == A, T:UIViewController>(_ routableViewController: T) {
         run = { c in
             var vc = routableViewController
             vc.onCompletion = c
@@ -52,24 +51,37 @@ extension Screen {
         self.init(ViewControllerOutput(viewController: viewController))
     }
     
-    init<T where T: Routable, T.T == A, T:UIViewController>(_ routableViewController: T) {
+    init<T where T: Routable, T.A == A, T:UIViewController>(_ routableViewController: T) {
         self.init(ViewControllerOutput(routableViewController))
     }
     
-//    init<B,T where T: Routable, T.T == A, T:UIViewController>(routableViewController: T, route: A -> Screen<B>) {
-//        self.init(ViewControllerOutput(routableViewController))
-//    }
-    
     func run(callback: A -> Void) -> UIViewController {
-        let nc = UINavigationController()
-        return build(navigationController: nc, callback: callback)
+        let navigationController = UINavigationController()
+        return build(navigationController: navigationController, callback: callback)
     }
     
     func then<B> (f: A -> Screen<B>) -> Screen<B> {
         return Screen<B> { (navigationController, callback) in
-            self.build(navigationController: navigationController, callback: { a in
+            return self.build(navigationController: navigationController, callback: { a in
                 f(a).build(navigationController: navigationController, callback: callback)
             })
+        }
+    }
+    
+    func pop<B> (type: UIViewController.Type) -> Screen<B>{
+        return Screen<B> { nc, c in
+            nc.popToViewControllerType(type)
+            return UIViewController()
+        }
+    }
+}
+
+extension UINavigationController {
+    func popToViewControllerType (type: UIViewController.Type) {
+        if let vc = self.viewControllers.filter({ (vc: UIViewController) -> Bool in
+            return vc.dynamicType === type
+        }).first {
+            self.popToViewController(vc, animated: true)
         }
     }
 }

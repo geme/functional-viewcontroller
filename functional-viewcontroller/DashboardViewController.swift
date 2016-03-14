@@ -18,14 +18,6 @@ class DashboardViewController: UIViewController, Routable {
     
     var onCompletion: DashboardOutput -> Void = { _ in () }
     
-    class func screen() -> ViewControllerOutput<DashboardOutput>{
-        return ViewControllerOutput { callback in
-            let vc = DashboardViewController()
-            vc.onCompletion = callback
-            return vc
-        }
-    }
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
