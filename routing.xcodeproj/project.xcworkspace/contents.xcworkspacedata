@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:functional-viewcontroller.xcodeproj">
+      location = "self:routing.xcodeproj">
    </FileRef>
 </Workspace>
